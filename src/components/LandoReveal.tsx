@@ -160,12 +160,6 @@ export default function ImageReveal({
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       className="relative w-full h-full cursor-none select-none overflow-hidden"
-      style={{
-        maskImage: "linear-gradient(to right, transparent 0%, black 20%, black 100%), linear-gradient(to bottom, black 0%, black 88%, transparent 100%)",
-        maskComposite: "intersect",
-        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 20%, black 100%), linear-gradient(to bottom, black 0%, black 88%, transparent 100%)",
-        WebkitMaskComposite: "destination-in",
-      }}
     >
       <div
         ref={innerRef}
@@ -224,10 +218,20 @@ export default function ImageReveal({
           />
         </svg>
 
+        {/* Soft Vignette Overlay Gradients */}
+        <div 
+          className="absolute inset-0 pointer-events-none z-20"
+          style={{ backgroundImage: "linear-gradient(to bottom, #000 0%, transparent 15%, transparent 85%, #000 100%)" }}
+        />
+        <div 
+          className="absolute inset-0 pointer-events-none z-20"
+          style={{ backgroundImage: "linear-gradient(to right, #000 0%, transparent 15%, transparent 85%, #000 100%)" }}
+        />
+
         {/* Visual indicator follower ring */}
         <div
           ref={followerRef}
-          className="absolute w-5 h-5 rounded-full border border-white/40 pointer-events-none -translate-x-1/2 -translate-y-1/2 z-10 opacity-0 transition-opacity duration-300"
+          className="absolute w-5 h-5 rounded-full border border-white/40 pointer-events-none -translate-x-1/2 -translate-y-1/2 z-30 opacity-0 transition-opacity duration-300"
           style={{ left: 0, top: 0 }}
         />
       </div>

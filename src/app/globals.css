@@ -17,3 +17,69 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
 }
+
+@keyframes metaball-orbit-1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(22px, -18px) scale(0.9);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes metaball-orbit-2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-24px, 14px) scale(0.85);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes metaball-orbit-3 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(14px, 24px) scale(0.9);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes metaball-orbit-4 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-18px, -22px) scale(0.85);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+.animate-metaball-1 {
+  animation: metaball-orbit-1 5s infinite ease-in-out;
+}
+
+.animate-metaball-2 {
+  animation: metaball-orbit-2 6.5s infinite ease-in-out;
+}
+
+.animate-metaball-3 {
+  animation: metaball-orbit-3 5.8s infinite ease-in-out;
+}
+
+.animate-metaball-4 {
+  animation: metaball-orbit-4 7.2s infinite ease-in-out;
+}
+
+

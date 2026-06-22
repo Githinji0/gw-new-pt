@@ -360,7 +360,7 @@ const TargetCursor = ({
       targetCornerPositionsRef.current = null;
       activeStrengthRef.current = 0;
     };
-  }, [targetSelector, spinDuration, moveCursor, constants, hideDefaultCursor, isMobile, hoverDuration, parallaxOn]);
+  }, [targetSelector, spinDuration, moveCursor, constants, hideDefaultCursor, isMobile, hoverDuration, parallaxOn, mounted]);
 
   useEffect(() => {
     if (isMobile || !cursorRef.current || !spinTl.current) return;
@@ -370,7 +370,7 @@ const TargetCursor = ({
         .timeline({ repeat: -1 })
         .to(cursorRef.current, { rotation: '+=360', duration: spinDuration, ease: 'none' });
     }
-  }, [spinDuration, isMobile]);
+  }, [spinDuration, isMobile, mounted]);
 
   if (!mounted || isMobile) {
     return null;

@@ -237,7 +237,9 @@ export const LogoLoop = memo<LogoLoopProps>(
       }
     }, [isVertical]);
 
-    useResizeObserver(updateDimensions, [containerRef, seqRef], [logos, gap, logoHeight, isVertical]);
+    const resizeElements = useMemo(() => [containerRef, seqRef], []);
+
+    useResizeObserver(updateDimensions, resizeElements, [logos, gap, logoHeight, isVertical]);
 
     useImageLoader(seqRef, updateDimensions, [logos, gap, logoHeight, isVertical]);
 

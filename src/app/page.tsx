@@ -3,6 +3,24 @@
 import React, { useState } from "react";
 import ImageReveal from "@/components/LandoReveal";
 import TargetCursor from "@/components/TargetCursor";
+import LogoLoop from "@/components/LogoLoop";
+import {
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
+  SiTailwindcss,
+  SiThreedotjs,
+  SiFramer,
+} from "react-icons/si";
+
+const techLogos = [
+  { node: <SiReact className="text-neutral-500 hover:text-cyan-400 transition-colors duration-300" />, title: "React" },
+  { node: <SiNextdotjs className="text-neutral-500 hover:text-white transition-colors duration-300" />, title: "Next.js" },
+  { node: <SiTypescript className="text-neutral-500 hover:text-blue-500 transition-colors duration-300" />, title: "TypeScript" },
+  { node: <SiTailwindcss className="text-neutral-500 hover:text-cyan-400 transition-colors duration-300" />, title: "Tailwind CSS" },
+  { node: <SiThreedotjs className="text-neutral-500 hover:text-white transition-colors duration-300" />, title: "Three.js" },
+  { node: <SiFramer className="text-neutral-500 hover:text-pink-500 transition-colors duration-300" />, title: "Framer Motion" },
+];
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -146,6 +164,25 @@ export default function Home() {
             <span className="text-[10px] uppercase tracking-[0.25em] text-neutral-600 font-medium">
               Scroll to explore
             </span>
+          </div>
+
+          {/* Tech Stack Logo Loop */}
+          <div className="mt-12 md:mt-20 w-full max-w-sm overflow-hidden relative py-4">
+            <p className="text-[9px] uppercase tracking-[0.2em] text-neutral-500 mb-4 font-semibold">
+              Technology Stack
+            </p>
+            <LogoLoop
+              logos={techLogos}
+              speed={40}
+              direction="left"
+              logoHeight={24}
+              gap={28}
+              hoverSpeed={0}
+              scaleOnHover
+              fadeOut
+              fadeOutColor="#000000"
+              ariaLabel="Technology partners"
+            />
           </div>
         </div>
 

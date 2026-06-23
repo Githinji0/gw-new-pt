@@ -42,6 +42,8 @@ const useResizeObserver = (
   elements: React.RefObject<any>[],
   dependencies: unknown[]
 ) => {
+  const el0 = elements[0]?.current;
+  const el1 = elements[1]?.current;
   useEffect(() => {
     if (typeof window === 'undefined') return;
     if (!window.ResizeObserver) {
@@ -60,7 +62,7 @@ const useResizeObserver = (
     return () => {
       observers.forEach(observer => observer?.disconnect());
     };
-  }, [callback, elements, ...dependencies]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [callback, el0, el1, ...dependencies]); // eslint-disable-line react-hooks/exhaustive-deps
 };
 
 const useImageLoader = (
@@ -225,21 +227,31 @@ export const LogoLoop = memo<LogoLoopProps>(
             containerRef.current.style.height = `${targetHeight}px`;
         }
         if (sequenceHeight > 0) {
-          setSeqHeight(Math.ceil(sequenceHeight));
+          setSeqHeight(prev => {
+            const next = Math.ceil(sequenceHeight);
+            return prev === next ? prev : next;
+          });
           const viewport = containerRef.current?.clientHeight ?? parentHeight ?? sequenceHeight;
           const copiesNeeded = Math.ceil(viewport / sequenceHeight) + ANIMATION_CONFIG.COPY_HEADROOM;
-          setCopyCount(Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded));
+          setCopyCount(prev => {
+            const next = Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded);
+            return prev === next ? prev : next;
+          });
         }
       } else if (sequenceWidth > 0) {
-        setSeqWidth(Math.ceil(sequenceWidth));
+        setSeqWidth(prev => {
+          const next = Math.ceil(sequenceWidth);
+          return prev === next ? prev : next;
+        });
         const copiesNeeded = Math.ceil(containerWidth / sequenceWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
-        setCopyCount(Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded));
+        setCopyCount(prev => {
+          const next = Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded);
+          return prev === next ? prev : next;
+        });
       }
     }, [isVertical]);
 
-    const resizeElements = useMemo(() => [containerRef, seqRef], []);
-
-    useResizeObserver(updateDimensions, resizeElements, [logos, gap, logoHeight, isVertical]);
+    useResizeObserver(updateDimensions, [containerRef, seqRef], [logos, gap, logoHeight, isVertical]);
 
     useImageLoader(seqRef, updateDimensions, [logos, gap, logoHeight, isVertical]);
 

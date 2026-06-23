@@ -82,4 +82,11 @@ body {
   animation: metaball-orbit-4 7.2s infinite ease-in-out;
 }
 
-
+/* ── Hide native scrollbar on the main scroll container ── */
+main::-webkit-scrollbar {
+  display: none;
+}
+main {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
